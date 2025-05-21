@@ -42,11 +42,10 @@ public class TestSolution {
 
     private static Stream<Arguments> casesForSolution() {
         return Stream.of(
-                Arguments.of(
-                        Input.of(new int[]{1, 2, 3, 0, 0, 0}, 3, new int[]{2, 5, 6}), new int[]{1, 2, 2, 3, 5, 6},
-                        Input.of(new int[]{1}, 1, new int[]{}), new int[]{1},
-                        Input.of(new int[]{0}, 0, new int[]{1}), new int[]{1}
-                ));
+                Arguments.of(Input.of(new int[]{1, 2, 3, 0, 0, 0}, 3, new int[]{2, 5, 6}), new int[]{1, 2, 2, 3, 5, 6}),
+                Arguments.of(Input.of(new int[]{1}, 1, new int[]{}), new int[]{1}),
+                Arguments.of(Input.of(new int[]{0}, 0, new int[]{1}), new int[]{1})
+        );
     }
 
     @ParameterizedTest
