@@ -5,7 +5,7 @@ class Solution {
         int minPrice = Integer.MAX_VALUE;
         int maxProfit = 0;
 
-        for (int i: prices) {
+        for (int i : prices) {
             if (i < minPrice) {
                 minPrice = i;
             } else if ((i - minPrice) > maxProfit) {
