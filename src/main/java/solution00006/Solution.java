@@ -1,56 +1,36 @@
 package solution00006;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 class Solution {
-    enum Mode {
-        DOWN(0, 1),
-
-        CROSS(1, -1);
-
-        final int x, y;
-
-        Mode(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-    }
-
     public String convert(String s, int numRows) {
         if (numRows == 1) {
             return s;
         }
-        var len = s.length();
-        var stride = numRows + numRows - 2;
-        var nStrides = len / stride;
-        if (len % stride != 0) {
-            nStrides++;
+
+        List<StringBuilder> rows = new ArrayList<>();
+        for (int i = 0; i < numRows; i++) {
+            rows.add(new StringBuilder());
         }
-        var width = 1 + (stride - numRows);
-        var col = nStrides * width;
-        var matrix = new char[numRows][col];
 
-        Mode mode = Mode.DOWN;
-        int x = 0, y = 0;
-
-        for (var c : s.toCharArray()) {
-            matrix[y][x] = c;
-            if ((y + mode.y) >= numRows) {
-                mode = Mode.CROSS;
-            } else if ((y + mode.y) < 0) {
-                mode = Mode.DOWN;
+        // 1 means up, -1 means down
+        int atRow = 0;
+        int direction = 1;
+        for (char c : s.toCharArray()) {
+            rows.get(atRow).append(c);
+            if ((atRow + direction) >= numRows) {
+                direction = -1;
+            } else if ((atRow + direction) < 0) {
+                direction = 1;
             }
-            x += mode.x;
-            y += mode.y;
+            atRow += direction;
         }
 
         StringBuilder sb = new StringBuilder();
-        for (var row : matrix) {
-            for (var c : row) {
-                if (c == 0) {
-                    continue;
-                }
-                sb.append(c);
-            }
+        for (StringBuilder row : rows) {
+            sb.append(row.toString());
         }
         return sb.toString();
     }
